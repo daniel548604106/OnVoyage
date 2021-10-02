@@ -1,3 +1,4 @@
-import tabRoutes from "./Tabs.js";
-const allRouters = [...tabRoutes];
+import tabRoutes from "./Tabs";
+import Account from "./Account";
+const allRouters = [...tabRoutes, ...Account];
 export default allRouters;

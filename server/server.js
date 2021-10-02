@@ -9,6 +9,63 @@ import App from "../src/App";
 const PORT = 8000;
 const app = express();
 
+// graphql
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+
+const Task = require("./models/Task.js");
+const tasks = [
+  new Task(1, "Learn NodeJs", "Learning is fun"),
+  new Task(2, "Learn Express", "Learning is fun"),
+  new Task(3, "Learn GraphQL", "Learning is fun"),
+];
+//// we use backticks because it allows us to write multiple lines of code
+const schema = buildSchema(` 
+	type User{
+		name: String,
+		id : ID
+	}
+
+  type Task{
+    id: ID,
+    title: String,
+    description: String,
+    completed: Boolean,
+    date : String
+  }
+
+	type Query {
+    hello: String,
+		msg : String,
+		user: User,
+    tasks : [Task]
+  }
+`);
+
+// The root provides a resolver function for each API endpoint
+const root = {
+  hello: () => {
+    return "Hello world!";
+  },
+  msg: () => {
+    return "message";
+  },
+  user: () => ({
+    name: "Daniel",
+    id: 12312,
+  }),
+  tasks: () => tasks,
+};
+
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+);
+
 app.use("^/$", (req, res, next) => {
   fs.readFile(path.resolve("./build/index.html"), "utf-8", (err, data) => {
     if (err) {
