@@ -3,12 +3,12 @@ import Account from "../pages/Account";
 
 const tabRoutes = [
   {
-    path: "/",
+    path: "/:tab(home)",
     exact: true,
     component: Home,
   },
   {
-    path: "/account",
+    path: "/:tab(account)",
     exact: true,
     component: Account,
   },

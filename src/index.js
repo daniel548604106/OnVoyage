@@ -1,27 +1,25 @@
+/* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
-import "./index.css";
+
+/* Basic CSS for apps built with Ionic */
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
 import "@ionic/react/css/typography.css";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
-import { IonReactRouter } from "@ionic/react-router";
+
+/* Optional CSS utils that can be commented out */
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/text-alignment.css";
+import "@ionic/react/css/text-transformation.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/display.css";
+
 import React from "react";
 import ReactDOM from "react-dom";
-import { Switch, Route } from "react-router-dom";
-import allRouters from "./routes";
+import App from "./App";
 ReactDOM.hydrate(
   <React.StrictMode>
-    <IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Switch>
-            {allRouters.map(({ path, exact, component }) => {
-              return <Route path={path} exact={exact} component={component} />;
-            })}
-          </Switch>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

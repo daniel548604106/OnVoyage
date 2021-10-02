@@ -8,22 +8,23 @@ import {
   IonButton,
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-const Home = () => {
+const Account = () => {
   const history = useHistory();
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>My Page</IonTitle>
+          <IonTitle>Setting</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        <div>asdaoisdjoaisjdoaisjdo</div>
         <IonButton onClick={() => history.push("/account")} fill="clear">
-          Start
+          Setting
         </IonButton>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Home;
+export default Account;
