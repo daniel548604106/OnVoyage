@@ -1,13 +1,14 @@
 import express from "express";
 import fs from "fs";
 import path from "path";
-
+import cors from "cors";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import App from "../src/App";
 
 const PORT = 8000;
 const app = express();
+app.use(cors());
 
 // graphql
 const { graphqlHTTP } = require("express-graphql");
@@ -38,7 +39,8 @@ const schema = buildSchema(`
     hello: String,
 		msg : String,
 		user: User,
-    tasks : [Task]
+    tasks : [Task],
+    task(id: ID!) : Task
   }
 `);
 
@@ -55,6 +57,16 @@ const root = {
     id: 12312,
   }),
   tasks: () => tasks,
+  task({ id }) {
+    let task = null;
+    for (let i in tasks) {
+      if (tasks[i].id === id) {
+        task = tasks[i];
+        break;
+      }
+    }
+    return task;
+  },
 };
 
 app.use(
